@@ -1,0 +1,194 @@
+divya@DESKTOP-2CGB6I5:~$ mongosh
+Current Mongosh Log ID: 67ee048bb2c0dcd2ec6b140a
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+Using MongoDB:          8.0.6
+Using Mongosh:          2.4.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2025-04-03T03:30:17.758+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-04-03T03:29:39.518+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2025-04-03T03:29:39.518+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2025-04-03T03:29:39.518+00:00: We suggest setting the contents of sysfsFile to 0.
+   2025-04-03T03:29:39.518+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+------
+
+test> use testdb
+switched to db testdb
+testdb> db.createCollection("Users");
+{ ok: 1 }
+testdb> db.createCollection("Products");
+{ ok: 1 }
+testdb> db.createCollection("Orders");
+{ ok: 1 }
+testdb> db.createCollection("Payments");
+{ ok: 1 }
+testdb> db.Users.insertOne({u_id:100,name:"aa",city:"xx"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0e38b2c0dcd2ec6b140b')
+}
+testdb> db.Users.insertOne({u_id:101,name:"bb",city:"yy"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0e4eb2c0dcd2ec6b140c')
+}
+testdb> db.Users.insertOne({u_id:102,name:"cc",city:"zz"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0e84b2c0dcd2ec6b140d')
+testdb> db.Products.insertOne({p_id:200,name:"choco",price:50,category:"candy",stock:50});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0f78b2c0dcd2ec6b140e')
+}
+testdb> db.Products.insertOne({p_id:201,name:"cake",price:200,category:"sweet",stock:10});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0fa6b2c0dcd2ec6b140f')
+}
+testdb> db.Products.insertOne({p_id:202,name:"ice",price:30,category:"dessert",stock:50});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee0ffab2c0dcd2ec6b1410')
+}
+testdb> db.Orders.insertOne({o_id:1,u_id:101,p_id:200,qty:20,status:"Delivered"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee10c4b2c0dcd2ec6b1411')
+}
+testdb> db.Orders.insertOne({o_id:2,u_id:100,p_id:202,qty:15,status:"Pending"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee1135b2c0dcd2ec6b1412')
+}
+testdb> db.Orders.insertOne({o_id:3,u_id:101,p_id:201,qty:5,status:"Pending"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee1165b2c0dcd2ec6b1413')
+}
+testdb> db.Payments.insertOne({pay_id:1000,o_id:1,amount:60,status:"paid",method:upi});
+ReferenceError: upi is not defined
+testdb> db.Payments.insertOne({pay_id:1000,o_id:1,amount:60,status:"paid",method:"upi"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee11c7b2c0dcd2ec6b1414')
+}
+testdb> db.Payments.insertOne({pay_id:2000,o_id:2,amount:40,status:"unpaid",method:"card"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee11e7b2c0dcd2ec6b1415')
+}
+testdb> db.Payments.insertOne({pay_id:3030,o_id:3,amount:150,status:"unpaid",method:"cash"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('67ee1234b2c0dcd2ec6b1416')
+}
+testdb> db.Users.find();
+[
+  {
+    _id: ObjectId('67ee0e38b2c0dcd2ec6b140b'),
+    u_id: 100,
+    name: 'aa',
+    city: 'xx'
+  },
+  {
+    _id: ObjectId('67ee0e4eb2c0dcd2ec6b140c'),
+    u_id: 101,
+    name: 'bb',
+    city: 'yy'
+  },
+  {
+    _id: ObjectId('67ee0e84b2c0dcd2ec6b140d'),
+    u_id: 102,
+    name: 'cc',
+    city: 'zz'
+  }
+]
+testdb> db.Products.find();
+[
+  {
+    _id: ObjectId('67ee0f78b2c0dcd2ec6b140e'),
+    p_id: 200,
+    name: 'choco',
+    price: 50,
+    category: 'candy',
+    stock: 50
+  },
+  {
+    _id: ObjectId('67ee0fa6b2c0dcd2ec6b140f'),
+    p_id: 201,
+    name: 'cake',
+    price: 200,
+    category: 'sweet',
+    stock: 10
+  },
+  {
+    _id: ObjectId('67ee0ffab2c0dcd2ec6b1410'),
+    p_id: 202,
+    name: 'ice',
+    price: 30,
+    category: 'dessert',
+    stock: 50
+  }
+]
+testdb> db.Orders.find();
+[
+  {
+    _id: ObjectId('67ee10c4b2c0dcd2ec6b1411'),
+    o_id: 1,
+    u_id: 101,
+    p_id: 200,
+    qty: 20,
+    status: 'Delivered'
+  },
+  {
+    _id: ObjectId('67ee1135b2c0dcd2ec6b1412'),
+    o_id: 2,
+    u_id: 100,
+    p_id: 202,
+    qty: 15,
+    status: 'Pending'
+  },
+  {
+    _id: ObjectId('67ee1165b2c0dcd2ec6b1413'),
+    o_id: 3,
+    u_id: 101,
+    p_id: 201,
+    qty: 5,
+    status: 'Pending'
+  }
+]
+testdb> db.Payments.find();
+[
+  {
+    _id: ObjectId('67ee11c7b2c0dcd2ec6b1414'),
+    pay_id: 1000,
+    o_id: 1,
+    amount: 60,
+    status: 'paid',
+    method: 'upi'
+  },
+  {
+    _id: ObjectId('67ee11e7b2c0dcd2ec6b1415'),
+    pay_id: 2000,
+    o_id: 2,
+    amount: 40,
+    status: 'unpaid',
+    method: 'card'
+  },
+  {
+    _id: ObjectId('67ee1234b2c0dcd2ec6b1416'),
+    pay_id: 3030,
+    o_id: 3,
+    amount: 150,
+    status: 'unpaid',
+    method: 'cash'
+  }
+]
