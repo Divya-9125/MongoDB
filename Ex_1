@@ -268,3 +268,63 @@ testdb> db.Products.find({p_id:200});
     stock: 50
   }
 ]
+testdb> dp.Products.updateOne({p_id:200},{$inc:{stock:-1}});      //update $inc
+ReferenceError: dp is not defined
+testdb> db.Products.updateOne({p_id:200},{$inc:{stock:-1}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Products.find({p_id:200});
+[
+  {
+    _id: ObjectId('67ee0f78b2c0dcd2ec6b140e'),
+    p_id: 200,
+    name: 'choco',
+    price: 50,
+    category: 'sweet',
+    stock: 49
+  }
+]
+testdb> db.Products.updateOne({p_id:200},{$inc:{stock:-9}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Products.find({p_id:200});
+[
+  {
+    _id: ObjectId('67ee0f78b2c0dcd2ec6b140e'),
+    p_id: 200,
+    name: 'choco',
+    price: 50,
+    category: 'sweet',
+    stock: 40
+  }
+]
+testdb> db.Products.updateOne({p_id:200},{$inc:{stock:+20}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Products.find({p_id:200});
+[
+  {
+    _id: ObjectId('67ee0f78b2c0dcd2ec6b140e'),
+    p_id: 200,
+    name: 'choco',
+    price: 50,
+    category: 'sweet',
+    stock: 60
+  }
+]
+testdb>
