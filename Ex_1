@@ -192,3 +192,79 @@ testdb> db.Payments.find();
     method: 'cash'
   }
 ]
+testdb> db.Users.find(u_id:100);         //find specifying one row data
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:18)
+
+> 1 | db.Users.find(u_id:100);
+    |                   ^
+  2 |
+
+testdb> db.Payments.find({u_id:100});
+
+testdb> db.Users.find({u_id:100});
+[
+  {
+    _id: ObjectId('67ee0e38b2c0dcd2ec6b140b'),
+    u_id: 100,
+    name: 'aa',
+    city: 'xx'
+  }
+]
+testdb> db.Orders.find({u_id:100});
+[
+  {
+    _id: ObjectId('67ee1135b2c0dcd2ec6b1412'),
+    o_id: 2,
+    u_id: 100,
+    p_id: 202,
+    qty: 15,
+    status: 'Pending'
+  }
+]
+testdb> db.Orders.updateOne({u_id:100},{$set:{status:"Cancelled"});      //updating the row data
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:57)
+
+> 1 | db.Orders.updateOne({u_id:100},{$set:{status:"Cancelled"});
+    |                                                          ^
+  2 |
+
+testdb> db.Orders.updateOne({u_id:100},{$set:{status:"Cancelled"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Orders.find({u_id:100});
+[
+  {
+    _id: ObjectId('67ee1135b2c0dcd2ec6b1412'),
+    o_id: 2,
+    u_id: 100,
+    p_id: 202,
+    qty: 15,
+    status: 'Cancelled'
+  }
+]
+testdb> db.Products.updateOne({p_id:200},{$set:{category:"sweet"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Products.find({p_id:200});
+[
+  {
+    _id: ObjectId('67ee0f78b2c0dcd2ec6b140e'),
+    p_id: 200,
+    name: 'choco',
+    price: 50,
+    category: 'sweet',
+    stock: 50
+  }
+]
