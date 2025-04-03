@@ -327,4 +327,27 @@ testdb> db.Products.find({p_id:200});
     stock: 60
   }
 ]
-testdb>
+testdb> db.Products.deleteOne({p_id:200});   //delecting row data
+{ acknowledged: true, deletedCount: 1 }
+testdb> db.Products.find({p_id:200});
+
+testdb> db.Products.find();
+[
+  {
+    _id: ObjectId('67ee0fa6b2c0dcd2ec6b140f'),
+    p_id: 201,
+    name: 'cake',
+    price: 200,
+    category: 'sweet',
+    stock: 10
+  },
+  {
+    _id: ObjectId('67ee0ffab2c0dcd2ec6b1410'),
+    p_id: 202,
+    name: 'ice',
+    price: 30,
+    category: 'dessert',
+    stock: 50
+  }
+]
+
