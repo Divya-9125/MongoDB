@@ -390,3 +390,37 @@ testdb> db.Users.find({},{name:1,city:1});
   { _id: ObjectId('67ee0e4eb2c0dcd2ec6b140c'), name: 'bb', city: 'yy' },
   { _id: ObjectId('67ee0e84b2c0dcd2ec6b140d'), name: 'cc', city: 'zz' }
 ]
+
+testdb> db.Users.updateMany({},{$inc:{age:23}})   // Adding columns if not or updates
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+testdb> db.Users.find();
+[
+  {
+    _id: ObjectId('67ee0e38b2c0dcd2ec6b140b'),
+    u_id: 100,
+    name: 'aa',
+    city: 'xx',
+    age: 23
+  },
+  {
+    _id: ObjectId('67ee0e4eb2c0dcd2ec6b140c'),
+    u_id: 101,
+    name: 'bb',
+    city: 'yy',
+    age: 23
+  },
+  {
+    _id: ObjectId('67ee0e84b2c0dcd2ec6b140d'),
+    u_id: 102,
+    name: 'cc',
+    city: 'zz',
+    age: 23
+  }
+]
+testdb>
