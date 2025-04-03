@@ -423,4 +423,35 @@ testdb> db.Users.find();
     age: 23
   }
 ]
-testdb>
+
+testdb> db.Users.replaceOne({ name: "aa" }, { name: "Divi", age: 18, city: "tvm" });   //Replace the row data
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+testdb> db.Users.find();
+[
+  {
+    _id: ObjectId('67ee0e38b2c0dcd2ec6b140b'),
+    name: 'Divi',
+    age: 18,
+    city: 'tvm'
+  },
+  {
+    _id: ObjectId('67ee0e4eb2c0dcd2ec6b140c'),
+    u_id: 101,
+    name: 'bb',
+    city: 'yy',
+    age: 23
+  },
+  {
+    _id: ObjectId('67ee0e84b2c0dcd2ec6b140d'),
+    u_id: 102,
+    name: 'cc',
+    city: 'zz',
+    age: 23
+  }
+]
