@@ -382,3 +382,11 @@ testdb> db.Products.find();
   }
 ]
 
+testdb> db.Users.find({},{u_id:0,name:1,city:1});   //Finding selected rows
+MongoServerError[Location31253]: Cannot do inclusion on field name in exclusion projection
+testdb> db.Users.find({},{name:1,city:1});
+[
+  { _id: ObjectId('67ee0e38b2c0dcd2ec6b140b'), name: 'aa', city: 'xx' },
+  { _id: ObjectId('67ee0e4eb2c0dcd2ec6b140c'), name: 'bb', city: 'yy' },
+  { _id: ObjectId('67ee0e84b2c0dcd2ec6b140d'), name: 'cc', city: 'zz' }
+]
