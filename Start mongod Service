@@ -1,0 +1,23 @@
+divya@DESKTOP-2CGB6I5:~$ mongosh
+Current Mongosh Log ID: 682236284f3966056a6b140a
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+divya@DESKTOP-2CGB6I5:~$ sudo systemctl status mongod         // CHECK THE STATUS OF MONGODB
+○ mongod.service - MongoDB Database Server
+     Loaded: loaded (/usr/lib/systemd/system/mongod.service; disabled; preset: enabled)
+     Active: inactive (dead)
+       Docs: https://docs.mongodb.org/manual
+divya@DESKTOP-2CGB6I5:~$ sudo systemctl start mongod             // START MONGODB SERVICES
+divya@DESKTOP-2CGB6I5:~$ sudo systemctl status mongod
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/usr/lib/systemd/system/mongod.service; disabled; preset: enabled)
+     Active: active (running) since Mon 2025-05-12 17:56:54 UTC; 3s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 885 (mongod)
+     Memory: 301.7M ()
+     CGroup: /system.slice/mongod.service
+             └─885 /usr/bin/mongod --config /etc/mongod.conf
+
+May 12 17:56:54 DESKTOP-2CGB6I5 systemd[1]: Started mongod.service - MongoDB Database Server.
+May 12 17:56:54 DESKTOP-2CGB6I5 mongod[885]: {"t":{"$date":"2025-05-12T17:56:54.475Z"},"s":"I",  "c":"CONTROL",  "id":7484500, "ctx">
+lines 1-11/11 (END)
